@@ -32,6 +32,7 @@
     "class-validator": "^0.13.2",
     "cross-env": "^7.0.3",
     "graphql": "^15.8.0",
+    "joi": "^17.6.0",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
