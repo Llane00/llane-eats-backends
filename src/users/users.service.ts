@@ -18,6 +18,7 @@ export class UsersService {
     try {
       const exists = await this.users.findOne({ email });
       if (exists) {
+        // TODO: hide user exists error
         return { ok: false, error: 'There is a user with that email already' };
       }
       await this.users.save(this.users.create({ email, password, role }));
