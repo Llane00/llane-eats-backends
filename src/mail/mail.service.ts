@@ -10,7 +10,7 @@ export class MailService {
     @Inject(CONFIG_OPTIONS) private readonly options: MailModuleOptions,
   ) {}
 
-  private async sendEmail(data: {
+  async sendEmail(data: {
     to: string;
     subject: string;
     template?: string;
@@ -25,7 +25,8 @@ export class MailService {
     form.append('to', to);
     form.append('subject', subject);
     form.append('template', template);
-    emailVars && emailVars.forEach((eVar) => form.append(`v:${eVar.key}`, eVar.value));
+    emailVars &&
+      emailVars.forEach((eVar) => form.append(`v:${eVar.key}`, eVar.value));
     try {
       const response = await got(
         `https://api.mailgun.net/v3/${this.options.domain}/messages`,
@@ -51,7 +52,7 @@ export class MailService {
       subject: '账户邮箱验证',
       template: '账户邮箱验证',
       emailVars: [
-        { key: 'username', value: 'Llane00' },
+        { key: 'username', value: email },
         { key: 'code', value: code },
       ],
     });
