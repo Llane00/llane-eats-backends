@@ -5,6 +5,7 @@ import { Column, Entity, ManyToOne, OneToMany, RelationId } from 'typeorm';
 import { Category } from './category.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Dish } from './dish.entity';
+import { Order } from 'src/order/entities/order.entity';
 
 @InputType('RestaurantInputType', { isAbstract: true })
 @ObjectType()
@@ -47,4 +48,7 @@ export class Restaurant extends CoreEntity {
   @Field((type) => [Dish])
   @OneToMany((type) => Dish, (dish) => dish.restaurant)
   menu: Dish[];
+
+  @OneToMany((type) => Order, (order) => order.restaurant)
+  orders: Order[];
 }
