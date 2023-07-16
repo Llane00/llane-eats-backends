@@ -45,7 +45,7 @@ export class RestaurantResolver {
 
   @Mutation((returns) => CreateRestaurantOutput)
   @SetMetadata('role', UserRole.Owner)
-  @Role([UserRole.Owner])
+  @Role(['Owner'])
   async createRestaurant(
     @AuthUser() authUser: User,
     @Args('input') createRestaurantInput: CreateRestaurantInput,
@@ -57,7 +57,7 @@ export class RestaurantResolver {
   }
 
   @Mutation((returns) => EditRestaurantOutput)
-  @Role([UserRole.Owner])
+  @Role(['Owner'])
   editRestaurant(
     @AuthUser() owner: User,
     @Args('input') editRestaurantInput: EditRestaurantInput,
@@ -66,7 +66,7 @@ export class RestaurantResolver {
   }
 
   @Mutation((returns) => DeleteRestaurantOutput)
-  @Role([UserRole.Owner])
+  @Role(['Owner'])
   deleteRestaurant(
     @AuthUser() owner: User,
     @Args('input') deleteRestaurantInput: DeleteRestaurantInput,
@@ -126,7 +126,7 @@ export class DishResolver {
   constructor(private readonly restaurantService: RestaurantService) {}
 
   @Mutation((type) => CreateDishOutput)
-  @Role([UserRole.Owner])
+  @Role(['Owner'])
   createDish(
     @AuthUser() owner: User,
     @Args('input') createDishInput: CreateDishInput,
@@ -135,7 +135,7 @@ export class DishResolver {
   }
 
   @Mutation((type) => EditDishOutput)
-  @Role([UserRole.Owner])
+  @Role(['Owner'])
   editDish(
     @AuthUser() owner: User,
     @Args('input') editDishInput: EditDishInput,
@@ -144,7 +144,7 @@ export class DishResolver {
   }
 
   @Mutation((type) => DeleteDishOutput)
-  @Role([UserRole.Owner])
+  @Role(['Owner'])
   deleteDish(
     @AuthUser() owner: User,
     @Args('input') deleteDishInput: DeleteDishInput,

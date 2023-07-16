@@ -16,6 +16,7 @@ import { Dish } from './restaurants/entities/dish.entity';
 import { OrderModule } from './order/orders.module';
 import { Order } from './order/entities/order.entity';
 import { OrderItem } from './order/entities/order-item.entity';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -74,6 +75,7 @@ import { OrderItem } from './order/entities/order-item.entity';
       domain: process.env.MAILGUN_DOMAIN,
       fromEmail: process.env.MAILGUN_FROM_EMAIL,
     }),
+    CommonModule,
     UsersModule,
     AuthModule,
     RestaurantsModule,
