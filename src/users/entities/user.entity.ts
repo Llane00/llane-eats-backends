@@ -62,6 +62,8 @@ export class User extends CoreEntity {
   @Field((type) => [Payment])
   @OneToMany((type) => Payment, (payment) => payment.user, {
     nullable: true,
+    // when eager is ture, can get payments directly
+    // eager: true,
   })
   payments: Payment[];
 
