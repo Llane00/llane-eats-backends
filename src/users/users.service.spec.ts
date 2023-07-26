@@ -148,7 +148,7 @@ describe('UserService', () => {
       );
       expect(result).toEqual({
         ok: false,
-        error: 'User not found',
+        error: '用户邮箱或密码错误',
       });
     });
 
@@ -158,7 +158,7 @@ describe('UserService', () => {
       };
       usersRepository.findOne.mockResolvedValue(mockedUser);
       const result = await service.login(loginArgs);
-      expect(result).toEqual({ ok: false, error: 'Wrong password' });
+      expect(result).toEqual({ ok: false, error: '用户邮箱或密码错误' });
     });
 
     it('should return token if password is correct', async () => {
@@ -176,7 +176,7 @@ describe('UserService', () => {
     it('should fail on expection', async () => {
       usersRepository.findOne.mockRejectedValue(new Error());
       const result = await service.login(loginArgs);
-      expect(result).toEqual({ ok: false, error: "Can't log user in." });
+      expect(result).toEqual({ ok: false, error: '登录失败' });
     });
   });
 
@@ -193,7 +193,7 @@ describe('UserService', () => {
     it('should fail if no user is found', async () => {
       usersRepository.findOneOrFail.mockRejectedValue(new Error());
       const result = await service.findById(1);
-      expect(result).toEqual({ ok: false, error: 'User Not Found.' });
+      expect(result).toEqual({ ok: false, error: '用户未注册' });
     });
   });
 

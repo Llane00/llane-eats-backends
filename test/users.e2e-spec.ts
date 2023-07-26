@@ -122,7 +122,7 @@ describe('UserModule (e2e)', () => {
           mutation {
             login(input: {
               email: "${testUser.email}",
-              password: "wrong password",
+              password: "用户邮箱或密码错误",
             }) {
               ok
               error
@@ -138,7 +138,7 @@ describe('UserModule (e2e)', () => {
             },
           } = res;
           expect(login.ok).toBe(false);
-          expect(login.error).toBe('Wrong password');
+          expect(login.error).toBe('用户邮箱或密码错误');
           expect(login.token).toBe(null);
         });
     });
@@ -205,7 +205,7 @@ describe('UserModule (e2e)', () => {
             },
           } = res;
           expect(ok).toBe(false);
-          expect(error).toBe('User Not Found.');
+          expect(error).toBe('用户未注册');
           expect(user).toBe(null);
         });
     });

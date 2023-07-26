@@ -59,14 +59,14 @@ export class UsersService {
       if (!user) {
         return {
           ok: false,
-          error: 'User not found',
+          error: '用户邮箱或密码错误',
         };
       }
       const passwordCorrect = await user.checkPassword(password);
       if (!passwordCorrect) {
         return {
           ok: false,
-          error: 'Wrong password',
+          error: '用户邮箱或密码错误',
         };
       }
       const token = this.jwtService.sign(user.id);
@@ -77,7 +77,7 @@ export class UsersService {
     } catch (error) {
       return {
         ok: false,
-        error: "Can't log user in.",
+        error: '登录失败',
       };
     }
   }
@@ -90,7 +90,7 @@ export class UsersService {
         user,
       };
     } catch (error) {
-      return { ok: false, error: 'User Not Found.' };
+      return { ok: false, error: '用户未注册' };
     }
   }
 
