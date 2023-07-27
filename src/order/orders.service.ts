@@ -43,7 +43,7 @@ export class OrderService {
       if (!restaurant) {
         return {
           ok: false,
-          error: 'Restaurant not found',
+          error: '未查询到该餐厅',
         };
       }
       let orderFinalPrice = 0;
@@ -53,7 +53,7 @@ export class OrderService {
         if (!dish) {
           return {
             ok: false,
-            error: 'Dish not found',
+            error: '未查询到该菜品',
           };
         }
         let dishFinalPrice = dish.price;
@@ -99,7 +99,7 @@ export class OrderService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not create order',
+        error: '订单创建失败',
       };
     }
   }
@@ -143,7 +143,7 @@ export class OrderService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not get orders',
+        error: '订单查询失败',
       };
     }
   }
@@ -191,13 +191,13 @@ export class OrderService {
       if (!order) {
         return {
           ok: false,
-          error: 'Order not found',
+          error: '未查询到该订单',
         };
       }
       if (!this.canSeeOrder(user, order)) {
         return {
           ok: false,
-          error: 'Permission not allowed',
+          error: '暂无权限',
         };
       }
       return {
@@ -207,7 +207,7 @@ export class OrderService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not get order',
+        error: '订单查询失败',
       };
     }
   }
@@ -223,20 +223,20 @@ export class OrderService {
       if (!order) {
         return {
           ok: false,
-          error: 'Order not found',
+          error: '未查询到该订单',
         };
       }
       if (!this.canSeeOrder(user, order)) {
         return {
           ok: false,
-          error: 'Permission not allowed',
+          error: '暂无权限',
         };
       }
       const canEdit = this.canEditOrder(user, status);
       if (!canEdit) {
         return {
           ok: false,
-          error: 'Permission not allowed',
+          error: '暂无权限',
         };
       }
       await this.orders.save({
@@ -260,7 +260,7 @@ export class OrderService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not edit order',
+        error: '订单修改失败',
       };
     }
   }
@@ -274,13 +274,13 @@ export class OrderService {
       if (!order) {
         return {
           ok: false,
-          error: 'Order not found',
+          error: '未查询到该订单',
         };
       }
       if (order.driver) {
         return {
           ok: false,
-          error: 'This order already has a driver',
+          error: '该订单已被接单',
         };
       }
       await this.orders.save({
@@ -296,7 +296,7 @@ export class OrderService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not take order',
+        error: '接单失败',
       };
     }
   }

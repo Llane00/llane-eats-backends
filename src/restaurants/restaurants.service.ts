@@ -56,7 +56,7 @@ export class RestaurantService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not create restaurant',
+        error: '创建餐厅失败',
       };
     }
   }
@@ -72,13 +72,13 @@ export class RestaurantService {
       if (!restaurant) {
         return {
           ok: false,
-          error: 'Restaurant not found',
+          error: '未查询到该餐厅',
         };
       }
       if (owner.id !== restaurant.ownerId) {
         return {
           ok: false,
-          error: "You can't edit a restaurant that you don't own",
+          error: '只能编辑修改自己名下的餐厅',
         };
       }
       let category: Category = null;
@@ -100,7 +100,7 @@ export class RestaurantService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not edit restaurant',
+        error: '编辑餐厅失败',
       };
     }
   }
@@ -114,13 +114,13 @@ export class RestaurantService {
       if (!restaurant) {
         return {
           ok: false,
-          error: 'Restaurant not found',
+          error: '未查询到该餐厅',
         };
       }
       if (owner.id !== restaurant.ownerId) {
         return {
           ok: false,
-          error: "You can't delete a restaurant that you don't own",
+          error: '餐厅删除失败',
         };
       }
       await this.restaurants.delete(restaurantId);
@@ -130,7 +130,7 @@ export class RestaurantService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not delete restaurant.',
+        error: '餐厅删除失败',
       };
     }
   }
@@ -145,7 +145,7 @@ export class RestaurantService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not load categories',
+        error: '目录查询失败',
       };
     }
   }
@@ -163,7 +163,7 @@ export class RestaurantService {
       if (!category) {
         return {
           ok: false,
-          error: 'Category not found',
+          error: '未查询到该目录',
         };
       }
       const restaurants = await this.restaurants.find({
@@ -186,7 +186,7 @@ export class RestaurantService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not load category',
+        error: '目录查询失败',
       };
     }
   }
@@ -209,7 +209,7 @@ export class RestaurantService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not load restaurant',
+        error: '餐厅查询失败',
       };
     }
   }
@@ -224,7 +224,7 @@ export class RestaurantService {
       if (!restaurant) {
         return {
           ok: false,
-          error: 'Restaurant not found',
+          error: '未查询到该餐厅',
         };
       }
       return {
@@ -234,7 +234,7 @@ export class RestaurantService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not find restaurant',
+        error: '未查询到该餐厅',
       };
     }
   }
@@ -254,7 +254,7 @@ export class RestaurantService {
       if (!restaurants) {
         return {
           ok: false,
-          error: 'Restaurant not found',
+          error: '未查询到该餐厅',
         };
       }
       return {
@@ -266,7 +266,7 @@ export class RestaurantService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not search for restaurants',
+        error: '餐厅查询失败',
       };
     }
   }
@@ -282,13 +282,13 @@ export class RestaurantService {
       if (!restaurant) {
         return {
           ok: false,
-          error: 'Restaurant not found',
+          error: '未查询到该餐厅',
         };
       }
       if (owner.id !== restaurant.ownerId) {
         return {
           ok: false,
-          error: 'Only owner can create dish',
+          error: '只有店长可以创建菜品',
         };
       }
       const dish = await this.dishes.save(
@@ -297,7 +297,7 @@ export class RestaurantService {
       if (!dish) {
         return {
           ok: false,
-          error: 'Could not create dish',
+          error: '菜品创建失败',
         };
       }
       return {
@@ -306,7 +306,7 @@ export class RestaurantService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not create dish',
+        error: '菜品创建失败',
       };
     }
   }
@@ -322,13 +322,13 @@ export class RestaurantService {
       if (!dish) {
         return {
           ok: false,
-          error: 'Dish not found',
+          error: '未查询到该菜品',
         };
       }
       if (owner.id !== dish.restaurant.ownerId) {
         return {
           ok: false,
-          error: 'Only owner can edit dish',
+          error: '只有店长可以编辑菜品',
         };
       }
       await this.dishes.save([
@@ -343,7 +343,7 @@ export class RestaurantService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not edit dish',
+        error: '编辑菜品失败',
       };
     }
   }
@@ -359,13 +359,13 @@ export class RestaurantService {
       if (!dish) {
         return {
           ok: false,
-          error: 'Dish not found',
+          error: '未查询到该菜品',
         };
       }
       if (owner.id !== dish.restaurant.ownerId) {
         return {
           ok: false,
-          error: 'Only owner can delete dish',
+          error: '只有店长可以删除菜品',
         };
       }
       await this.dishes.delete(dishId);
@@ -375,7 +375,7 @@ export class RestaurantService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not delete dish',
+        error: '菜品删除失败',
       };
     }
   }

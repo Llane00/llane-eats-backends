@@ -351,7 +351,7 @@ describe('UserModule (e2e)', () => {
             },
           } = res;
           expect(ok).toBe(false);
-          expect(error).toBe('Verification not found.');
+          expect(error).toBe('未查询到该验证码');
         });
     });
   });

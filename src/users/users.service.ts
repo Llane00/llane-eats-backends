@@ -33,7 +33,7 @@ export class UsersService {
       const exists = await this.users.findOne({ email });
       if (exists) {
         // TODO: hide user exists error
-        return { ok: false, error: 'There is a user with that email already' };
+        return { ok: false, error: '该邮箱已被注册' };
       }
       const user = await this.users.save(
         this.users.create({ email, password, role }),
@@ -43,10 +43,10 @@ export class UsersService {
           user,
         }),
       );
-      this.mailService.sendVerificationEmail(user.email, verification.code);
+      // this.mailService.sendVerificationEmail(user.email, verification.code);
       return { ok: true };
     } catch (error) {
-      return { ok: false, error: "Couldn't create account" };
+      return { ok: false, error: '用户创建失败' };
     }
   }
 
@@ -117,7 +117,7 @@ export class UsersService {
       await this.users.save(user);
       return { ok: true };
     } catch (error) {
-      return { ok: false, error: 'Could not update profile.' };
+      return { ok: false, error: '无法更新个人信息' };
     }
   }
 
@@ -133,9 +133,9 @@ export class UsersService {
         await this.verifications.delete(verification.id);
         return { ok: true };
       }
-      return { ok: false, error: 'Verification not found.' };
+      return { ok: false, error: '未查询到该验证码' };
     } catch (error) {
-      return { ok: false, error: 'Could not verify email.' };
+      return { ok: false, error: '邮箱验证失败' };
     }
   }
 }

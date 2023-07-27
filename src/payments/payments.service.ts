@@ -29,13 +29,13 @@ export class PaymentService {
       if (!restaurant) {
         return {
           ok: false,
-          error: 'Restaurant not found',
+          error: '未查询到该餐厅',
         };
       }
       if (restaurant.ownerId !== owner.id) {
         return {
           ok: false,
-          error: 'Permission not allowed',
+          error: '暂无权限',
         };
       }
       await this.payments.save(
@@ -56,7 +56,7 @@ export class PaymentService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not create payment',
+        error: '支付失败',
       };
     }
   }
@@ -71,7 +71,7 @@ export class PaymentService {
     } catch (error) {
       return {
         ok: false,
-        error: 'Could not get payments',
+        error: '付款信息查询错误',
       };
     }
   }
