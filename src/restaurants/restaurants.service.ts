@@ -199,6 +199,7 @@ export class RestaurantService {
         },
         take: 25,
         skip: (page - 1) * 25,
+        relations: ['category'],
       });
       return {
         ok: true,
