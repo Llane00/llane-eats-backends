@@ -157,6 +157,7 @@ export class RestaurantService {
   async findCategoryBySlug({
     slug,
     page,
+    pageSize,
   }: CategoryInput): Promise<CategoryOutput> {
     try {
       const category = await this.categories.findOne({ slug });
@@ -173,15 +174,15 @@ export class RestaurantService {
         order: {
           isPromoted: 'DESC',
         },
-        take: 25,
-        skip: (page - 1) * 25,
+        take: pageSize,
+        skip: (page - 1) * pageSize,
       });
       category.restaurants = restaurants;
       const totalResults = await this.countRestaurants(category);
       return {
         ok: true,
         category,
-        totalPages: Math.ceil(totalResults / 25),
+        totalPages: Math.ceil(totalResults / pageSize),
       };
     } catch (error) {
       return {
@@ -191,20 +192,23 @@ export class RestaurantService {
     }
   }
 
-  async allRestaurants({ page }: RestaurantsInput): Promise<RestaurantsOutput> {
+  async allRestaurants({
+    page,
+    pageSize,
+  }: RestaurantsInput): Promise<RestaurantsOutput> {
     try {
       const [restaurants, totalResults] = await this.restaurants.findAndCount({
         order: {
           isPromoted: 'DESC',
         },
-        take: 25,
-        skip: (page - 1) * 25,
+        take: pageSize,
+        skip: (page - 1) * pageSize,
         relations: ['category'],
       });
       return {
         ok: true,
         results: restaurants,
-        totalPages: Math.ceil(totalResults / 25),
+        totalPages: Math.ceil(totalResults / pageSize),
         totalResults: totalResults,
       };
     } catch (error) {
@@ -243,14 +247,15 @@ export class RestaurantService {
   async searchRestaurantByName({
     query,
     page,
+    pageSize,
   }: SearchRestaurantInput): Promise<SearchRestaurantOutput> {
     try {
       const [restaurants, totalResults] = await this.restaurants.findAndCount({
         where: {
           name: Raw((name) => `${name} ILIKE '%${query}%'`),
         },
-        skip: (page - 1) * 25,
-        take: 25,
+        skip: (page - 1) * pageSize,
+        take: pageSize,
       });
       if (!restaurants) {
         return {
@@ -262,7 +267,7 @@ export class RestaurantService {
         ok: true,
         restaurants,
         totalResults,
-        totalPages: Math.ceil(totalResults / 25),
+        totalPages: Math.ceil(totalResults / pageSize),
       };
     } catch (error) {
       return {
