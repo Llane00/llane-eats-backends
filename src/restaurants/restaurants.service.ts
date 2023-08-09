@@ -180,8 +180,11 @@ export class RestaurantService {
       const totalResults = await this.countRestaurants(category);
       return {
         ok: true,
-        restaurants,
         category,
+        restaurants: restaurants.map((restaurant) => ({
+          ...restaurant,
+          category,
+        })),
         totalPages: Math.ceil(totalResults / pageSize),
         totalResults,
       };
@@ -255,6 +258,7 @@ export class RestaurantService {
         where: {
           name: Raw((name) => `${name} ILIKE '%${query}%'`),
         },
+        relations: ['category'],
         skip: (page - 1) * pageSize,
         take: pageSize,
       });
